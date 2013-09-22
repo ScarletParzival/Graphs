@@ -43,14 +43,27 @@ class GraphNode {
     @Override
     public String toString(){
         StringBuffer adjacencyListBuffer = new StringBuffer();
-        boolean commaAdded = true;
         for(GraphNode a: adjacencyList){
-            if(!commaAdded){
-                commaAdded = !commaAdded;
-                adjacencyListBuffer.append(",");
-            }
             adjacencyListBuffer.append(a.vertex);
         }
         return ""+vertex+" --> ["+ new String(adjacencyListBuffer) + "]";
     }
+
+    public String toStringWithState(){
+        StringBuffer adjacencyListBuffer = new StringBuffer();
+        boolean commaAdded = false;
+        for(GraphNode a: adjacencyList){
+            if(commaAdded == true){
+                adjacencyListBuffer.append(", ");
+            }
+            else {
+                commaAdded = true;
+            }
+            adjacencyListBuffer.append(a.vertex);
+            adjacencyListBuffer.append(":");
+            adjacencyListBuffer.append(a.state);
+        }
+        return ""+vertex+" --> ["+ new String(adjacencyListBuffer) + "]";
+    }
+
 }

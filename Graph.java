@@ -29,4 +29,18 @@ public class Graph {
     public GraphNode[] getNodes() {
         return vertices;
     }
+
+    public void printGraph(){
+        System.out.println("Graph:");
+        for(GraphNode node : vertices){
+            System.out.println(node.toString());
+        }
+    }
+
+    public void printGraphWithState(){
+        System.out.println("Graph:");
+        for(GraphNode node : vertices){
+            System.out.println(node.toStringWithState());
+        }
+    }
 }
