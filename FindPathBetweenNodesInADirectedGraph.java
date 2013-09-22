@@ -99,23 +99,26 @@ public class FindPathBetweenNodesInADirectedGraph {
     }
 
     public static boolean searchGraph(Graph g, GraphNode start, GraphNode end){
-        Queue<GraphNode> queue = new LinkedList<GraphNode>();
+        LinkedList<GraphNode> queue = new LinkedList<GraphNode>();
         start.state = GraphNode.State.Visiting;
         queue.add(start);
+        GraphNode currentNode;
         while (!queue.isEmpty()){
-            GraphNode current = queue.remove();
-            for(GraphNode adjacent : current.getAdjacencyList()){
-                if(adjacent.state == GraphNode.State.Unvisited){
-                    if(adjacent == end){
-                        return true;
-                    }
-                    else{
-                        adjacent.state = GraphNode.State.Visiting;
-                        queue.add(adjacent);
+            currentNode = queue.removeFirst();
+            if(currentNode!=null){
+                for(GraphNode adjacentNode: currentNode.getAdjacencyList()){
+                    if(adjacentNode.state == GraphNode.State.Unvisited){
+                        if(adjacentNode == end){
+                            return true;
+                        }
+                        else {
+                            adjacentNode.state = GraphNode.State.Visiting;
+                            queue.add(adjacentNode);
+                        }
                     }
                 }
             }
-            current.state = GraphNode.State.Visited;
+            currentNode.state = GraphNode.State.Visited;
         }
         return false;
     }
@@ -129,14 +132,17 @@ public class FindPathBetweenNodesInADirectedGraph {
         GraphNode[] n = g.getNodes();
         GraphNode start = n[3];
         GraphNode end = n[5];
-        System.out.println("\n"+search(g, start, end));
+//        System.out.println("\n"+searchGraph(g, start, end));
+//        System.out.println("\n"+search(g, start, end));
 
         start = n[0];
         end = n[4];
-        System.out.println("\n"+search(g,start,end));
+//        System.out.println("\n"+search(g, start, end));
+//        System.out.println("\n"+searchGraph(g, start, end));
 
         start = n[1];
         end = n[3];
-        System.out.println("\n"+search(g,start,end));
+        System.out.println("\n"+search(g, start, end));
+        System.out.println("\n"+searchGraph(g, start, end));
     }
 }
